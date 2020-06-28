@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coronavirus Status</title>
+</head>
+<body>
+    <form action="/" method="POST">
+        <select name="country">
+            {% for countries in listOfCountry %}
+                {% if countries == initc %}
+                    <option value="{{ countries }}" selected> {{ countries }} </option>
+                {% else %}
+                    <option value="{{ countries }}"> {{ countries }} </option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <input type="date" name="from" value="{{ initf }}">
+        <input type="date" name="to" value="{{ initt }}">
+        <select name="option">
+            <option value="Total Case"> Total Case </option>
+            <option value="New Case"> New Case </option>
+            <option value="Total Death"> Total Death </option>
+            <option value="New Death"> New Death </option>
+        </select>
+        <button type="submit">Get Data</button>
+    </form>
+    {% if num == "Null" %}
+        <p>Select the Graph!</p>
+    {% else %}
+        <img src="{{url_for('static', filename='/'.join(['graph', 'getplots' + num + '.png']) )}}">
+    {% endif %}
+    <a class="bar" href="/trashtrash" role="button">Clear</a>
+</body>
+</html>
